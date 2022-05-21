@@ -1,0 +1,3 @@
+rep "HW-U2-JPC&MP@MaxiPalermo@cloud"
+  path "/"
+    smartbranch "/main" 
