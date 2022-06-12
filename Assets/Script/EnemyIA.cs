@@ -15,8 +15,7 @@ public class EnemyIA : MonoBehaviour
 
     void Start()
     {
-      enemyBullet.transform.position = player.transform.position * speedBulletEnemy * Time.deltaTime;
-        
+      enemyBullet.transform.position = player.transform.position * speedBulletEnemy * Time.deltaTime;  
     }
 
     void Update()

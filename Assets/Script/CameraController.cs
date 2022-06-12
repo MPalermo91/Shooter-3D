@@ -7,11 +7,13 @@ public class CameraController : MonoBehaviour
    public GameObject player;
 
     private Vector3 _offset;
-
+    private Transform _transformCamera;
+    private RaycastHit _hitCamera;
     
     void Start()
     {
-        _offset = transform.position - player.transform.position;
+       _offset = transform.position - player.transform.position;
+       _offset = _transformCamera.localPosition;
     }
 
     
@@ -19,7 +21,17 @@ public class CameraController : MonoBehaviour
     {
         transform.position = player.transform.position;
         transform.rotation = player.transform.rotation;
-    //   transform.LookAt(player.transform.position);
+        //   transform.LookAt(player.transform.position);
+
+
+        if (Physics.Linecast(transform.position, _transformCamera.position + transform.localRotation * _offset, out _hitCamera))
+        {
+            _transformCamera.localPosition = new Vector3(0, 0, -Vector3.Distance(transform.position, _hitCamera.point));
+        }
+        else
+        {
+            _transformCamera.localPosition = Vector3.Lerp (_transformCamera.localPosition, _offset, Time.deltaTime);
+        }
     }
 
    

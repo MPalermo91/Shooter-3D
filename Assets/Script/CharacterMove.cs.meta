@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: dc53cc9e2438cea4b853c6003ca47c3f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - controlMov: {instanceID: 0}
+  - marcadorCamino: {fileID: 8512138555810148220, guid: f09d1e742d686bf428de89ce5b55ca25, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

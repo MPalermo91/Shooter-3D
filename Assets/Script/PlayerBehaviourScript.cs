@@ -10,6 +10,7 @@ public class PlayerBehaviourScript : MonoBehaviour
 
     private Vector3 _rot;
     private Vector3 _move;
+    private float _gravity = -36.8f;
 
     public GameObject marcadorCamino;
 
@@ -18,38 +19,55 @@ public class PlayerBehaviourScript : MonoBehaviour
         
     }
 
-   
+    public void Awake()
+    {
+        
+    }
     void Update()
     {
-        var moveHorizontal = Input.GetAxis("Horizontal");
-        var moveAdvance = Input.GetAxis("Vertical");
-        
-        _move = new Vector3(moveHorizontal, 0.0f, moveAdvance);
-        
-       // transform.Translate(Vector3.Normalize(_move) * speedPlayer * Time.deltaTime);
-        if (Input.GetKey(KeyCode.LeftShift) == true)   //Si presionamos "LeftShift" Corre
-        {
-            transform.Translate(Vector3.Normalize(_move) * speedPlus * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.LeftShift) == false) // Si dejamos de presionar "LeftShift" Camina
-        {
-            transform.Translate(Vector3.Normalize(_move) * speedPlayer * Time.deltaTime);
-        }
+        Move();
+        CamRotate();
+        Correr();
+        Marcador();
+    }
 
-       
+    private void Move()
+    {
+        float hMove = Input.GetAxis("Horizontal");
+        float vMove = Input.GetAxis("Vertical");
 
+
+        Vector3 move = transform.forward * hMove + transform.right * vMove;
+
+        
+    }
+
+    private void CamRotate()
+    {
         _rot.x = Input.GetAxis("Mouse X");
         _rot.y = Input.GetAxis("Mouse Y");
 
-       transform.rotation *= Quaternion.Euler(0, _rot.x, 0);
-
+        transform.rotation *= Quaternion.Euler(0, _rot.x, 0);
+    }
+    private void Correr()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) == true)   //Si presionamos Shift Izquierdo Corre
+        {
+            transform.Translate(Vector3.Normalize(_move) * speedPlus * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.LeftShift) == false) // Si dejamos de presionar Shift Izquierdo Camina
+        {
+            transform.Translate(Vector3.Normalize(_move) * speedPlayer * Time.deltaTime);
+        }
+    }
+    private void Marcador ()
+    {
         if (Input.GetKeyDown(KeyCode.F))
         {
             Instantiate(marcadorCamino, this.transform.position, Quaternion.identity);
-            Debug.Log("Se crea un marcador de camino");
         }
-    }
 
+    }
 
 
 
